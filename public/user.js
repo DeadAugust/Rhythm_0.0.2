@@ -26,12 +26,13 @@ var ab = 'ab';
 var foot = 'foot';
 
 function setup(){
+	noCanvas();
 	//- - - - - overall
-	var screenSize = windowHeight - 100;
-	var canvas = createCanvas(int(screenSize * .666), screenSize);
- 	canvas.parent('myCanvas');
-	background(0, 150, 50);
-	textAlign(CENTER);
+	// var screenSize = windowHeight - 100;
+	// var canvas = createCanvas(int(screenSize * .666), screenSize);
+ 	// canvas.parent('myCanvas');
+	// background(0, 150, 50);
+	// textAlign(CENTER);
 	//
 	// for (i = 0; i < buttons.length; i++){
 	//
@@ -41,14 +42,37 @@ function setup(){
 	// textSize(30);
 	// fill(0);
 	//buttons -- can't use for loop to set all this up?
-	abButt = createButton('ab workout');
-	abButt.parent('myCanvas');
-	// abButt.mousePressed(buttPress(ab));
-	abButt.mousePressed(abPress);
-
+	// abButt = createButton('ab workout');
+	// // abButt.parent('myCanvas');
+	// abButt.center();
+	// abButt.mousePressed(function(){
+	// 	socket.emit('buttPress', 'ab');
+	// });
+	// createP(' ');
+	// footButt = createButton('jump on one foot');
+	// // footButt.parent('myCanvas');
+	// footButt.center();
+	// footButt.mousePressed(function(){
+	// 	socket.emit('buttPress', 'foot');
+	// });
+	// createP('');
+	abButt = createButton('Do an ab workout');
+	// abButt.parent('body');
+	// abButt.center();
+	abButt.style('background-color', red);
+	abButt.id('butts')
+	abButt.mousePressed(function(){
+		socket.emit('buttPress', 'ab');
+	});
+	// createP(' ');
 	footButt = createButton('jump on one foot');
-	footButt.parent('myCanvas');
-	footButt.mousePressed(footPress);
+	// footButt.parent('myCanvas');
+	// footButt.parent('body');
+	// footButt.center();
+	footButt.id('butts')
+	footButt.mousePressed(function(){
+		socket.emit('buttPress', 'foot');
+	});
 
 
 	//map slots -- 20
@@ -73,7 +97,7 @@ function setup(){
 }
 
 function draw() {
-background(200,100,0);
+// background(200,100,0);
 		// var data = {
 		// 	x: atman.x,
 		// 	y: atman.y,

@@ -1,7 +1,12 @@
 html, body {
-  margin: 0;
-  padding: 0;
+  margin: 5px;
+  /* padding: 5px; */
 }
 canvas {
   display: block;
+}
+button {
+  padding: 2px;
+  margin: 10px;
+  vertical-align: middle;
 }
