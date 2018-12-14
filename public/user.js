@@ -16,11 +16,14 @@ var socket = io();
 //- - - - - - - - game over
 // var gameOver = false; //if time's up
 var buttons = [];
+var butt;
 var abButt, footButt, handstandButt, pushupButt, squatButt, dabButt, stretchButt;
 var cookieButt, waterButt, lemonButt, breathButt;
 var flogButt, shockButt, slapButt;
 var paintButt, juggleButt, clothingoffButt, clothingonButt;
 var stopButt;
+var ab = 'ab';
+var foot = 'foot';
 
 function setup(){
 	//- - - - - overall
@@ -40,10 +43,12 @@ function setup(){
 	//buttons -- can't use for loop to set all this up?
 	abButt = createButton('ab workout');
 	abButt.parent('myCanvas');
-	abButt.mousePressed(buttPress('ab'));
+	// abButt.mousePressed(buttPress(ab));
+	abButt.mousePressed(abPress);
+
 	footButt = createButton('jump on one foot');
 	footButt.parent('myCanvas');
-	footButt.mousePressed(buttPress('foot'));
+	footButt.mousePressed(footPress);
 
 
 	//map slots -- 20
@@ -68,7 +73,7 @@ function setup(){
 }
 
 function draw() {
-
+background(200,100,0);
 		// var data = {
 		// 	x: atman.x,
 		// 	y: atman.y,
@@ -83,9 +88,19 @@ function draw() {
 				// gameOver = true;
 			}
 		);
-	}
+}
+
+function abPress(){
+	socket.emit('buttPress', 'ab')
+}
+function footPress(){
+	socket.emit('buttPress', 'foot')
 }
 
 function buttPress(butt){
 	socket.emit('buttPress', butt);
+	// 	function(){
+	// 		var data = butt;
+	// 	}
+	// );
 }

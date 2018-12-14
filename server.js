@@ -1,3 +1,5 @@
+
+
 // var atmans = [];
 
 /*
@@ -119,18 +121,13 @@ io.sockets.on('connection',
     socket.on('buttPress',
       function(data){
         command = data;
-        socket.emit('newCommand', command);
+        socket.broadcast.emit('newCommand', command);
+        console.log(command);
       }
     );
 
     socket.on('disconnect',
       function(data){
-        var atman;
-        for (var i = 0; i < atmans.length; i++){
-          if (socket.id == atmans[i].id){
-            atmans.splice(i, 1);
-          }
-        }
         console.log("Client has disconnected");
       }
     );

@@ -14,7 +14,8 @@ var nextSpawn = 1;//how long until next spawn
 var spawnFreq = 20;//game-wide scaling for spawn timing
 
 
-var started = false;
+// var started = false;
+var command = 'start';
 
 function setup(){
   createCanvas(windowWidth, windowHeight);
@@ -31,7 +32,15 @@ function setup(){
       // atmans = data.atmans;
     }
   );
+
+  socket.on('newCommand',
+    function(data){
+      console.log('new');
+      command = data;
+    });
 }
+
+
 
 
 function draw (){
