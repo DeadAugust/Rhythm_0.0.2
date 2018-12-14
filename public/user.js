@@ -9,21 +9,17 @@ var socket = io();
 // var lastButt = 0;
 // var debounce = 800;
 
-//- - - - - - - - map
-// var slots = []; //nested array?
-
-// var upButt, downButt, leftButt, rightButt; //movement
-//- - - - - - - - game over
-// var gameOver = false; //if time's up
 var buttons = [];
 var butt;
 var abButt, footButt, handstandButt, pushupButt, squatButt, dabButt, stretchButt;
-var cookieButt, waterButt, lemonButt, breathButt;
+var cookieButt, waterButt, lemonButt, breathButt, jalapenoButt;
 var flogButt, shockButt, slapButt;
 var paintButt, juggleButt, clothingoffButt, clothingonButt;
 var stopButt;
-var ab = 'ab';
-var foot = 'foot';
+// var ab = 'ab';
+// var foot = 'foot';
+//category colors
+var musclesCol, mouthCol, skinCol, handsCol;
 
 function setup(){
 	noCanvas();
@@ -33,58 +29,135 @@ function setup(){
  	// canvas.parent('myCanvas');
 	// background(0, 150, 50);
 	// textAlign(CENTER);
-	//
-	// for (i = 0; i < buttons.length; i++){
-	//
-	// }
 
-	// - - - - -  player start screen
-	// textSize(30);
-	// fill(0);
-	//buttons -- can't use for loop to set all this up?
-	// abButt = createButton('ab workout');
-	// // abButt.parent('myCanvas');
-	// abButt.center();
-	// abButt.mousePressed(function(){
-	// 	socket.emit('buttPress', 'ab');
-	// });
-	// createP(' ');
-	// footButt = createButton('jump on one foot');
-	// // footButt.parent('myCanvas');
-	// footButt.center();
-	// footButt.mousePressed(function(){
-	// 	socket.emit('buttPress', 'foot');
-	// });
-	// createP('');
-	abButt = createButton('Do an ab workout');
-	// abButt.parent('body');
-	// abButt.center();
-	abButt.style('background-color', red);
-	abButt.id('butts')
+	//category colors
+	musclesCol = color(46, 184, 46, 200); //green
+	mouthCol = color(255, 117, 26, 200); //orange
+	skinCol = color(77, 166, 255, 200); //blue
+	handsCol = color(255, 102, 204, 200); //pink
+
+	//- - - - - - muscles
+	abButt = createButton('Ab Ripper X');
+	abButt.style('background-color', musclesCol);
 	abButt.mousePressed(function(){
 		socket.emit('buttPress', 'ab');
 	});
-	// createP(' ');
-	footButt = createButton('jump on one foot');
-	// footButt.parent('myCanvas');
-	// footButt.parent('body');
-	// footButt.center();
-	footButt.id('butts')
-	footButt.mousePressed(function(){
-		socket.emit('buttPress', 'foot');
+
+	// footButt = createButton('jump on one foot');
+	// footButt.style('background-color', musclesCol);
+	// footButt.mousePressed(function(){
+	// 	socket.emit('buttPress', 'foot');
+	// });
+
+	handstandButt = createButton('invert body');
+	handstandButt.style('background-color', musclesCol);
+	handstandButt.mousePressed(function(){
+		socket.emit('buttPress', 'handstand');
+	});
+
+	pushupButt = createButton('push the earth away');
+	pushupButt.style('background-color', musclesCol);
+	pushupButt.mousePressed(function(){
+		socket.emit('buttPress', 'pushup');
+	});
+
+	squatButt = createButton('accrue thigh mass');
+ 	squatButt.style('background-color', musclesCol);
+ 	squatButt.mousePressed(function(){
+ 		socket.emit('buttPress', 'squat');
+ 	});
+
+
+	dabButt = createButton('#dab');
+ 	dabButt.style('background-color', musclesCol);
+ 	dabButt.mousePressed(function(){
+ 		socket.emit('buttPress', 'dab');
+ 	});
+
+	stretchButt = createButton('stretch, for your health');
+	stretchButt.style('background-color', musclesCol);
+	stretchButt.mousePressed(function(){
+		socket.emit('buttPress', 'stretch');
+	});
+
+	//- - - - - - - mouth
+	cookieButt = createButton('nom on a cookie');
+	cookieButt.style('background-color', mouthCol);
+	cookieButt.mousePressed(function(){
+		socket.emit('buttPress', 'cookie');
 	});
 
 
-	//map slots -- 20
-	// for (var y = 0; y < 5; y++){
-	// 	slots[y] = [];
-	// 	for (var x = 0; x < 4; x ++){
-	// 		slots[y][x] = {
-	// 			x: x * width/5,
-	// 			y: y * height/6
-	// 		}
-	// 	}
-	// }
+	waterButt = createButton('slurp some water');
+	waterButt.style('background-color', mouthCol);
+	waterButt.mousePressed(function(){
+		socket.emit('buttPress', 'water');
+	});
+
+
+	lemonButt = createButton('suckle a lemon');
+	lemonButt.style('background-color', mouthCol);
+	lemonButt.mousePressed(function(){
+		socket.emit('buttPress', 'lemon');
+	});
+
+	breathButt = createButton('find a deep breath');
+	breathButt.style('background-color', mouthCol);
+	breathButt.mousePressed(function(){
+		socket.emit('buttPress', 'breath');
+	});
+
+	jalapenoButt = createButton('chomp on a jalapeno');
+	jalapenoButt.style('background-color', mouthCol);
+	jalapenoButt.mousePressed(function(){
+		socket.emit('buttPress', 'jalapeno');
+	});
+
+	//- - - - - - - skin
+	flogButt = createButton('mea flogga'); //too obtuse?
+	flogButt.style('background-color', skinCol);
+	flogButt.mousePressed(function(){
+		socket.emit('buttPress', 'flog');
+	});
+
+	shockButt = createButton('Shock face');
+	shockButt.style('background-color', skinCol);
+	shockButt.mousePressed(function(){
+		socket.emit('buttPress', 'shock');
+	});
+
+	slapButt = createButton('slap yourself');
+	slapButt.style('background-color', skinCol);
+	slapButt.mousePressed(function(){
+		socket.emit('buttPress', 'slap');
+	});
+
+	//- - - - - - - hands
+
+	paintButt = createButton('paint yourself');
+	paintButt.style('background-color', handsCol);
+	paintButt.mousePressed(function(){
+		socket.emit('buttPress', 'paint');
+	});
+
+	juggleButt = createButton('juggle dildos');
+	juggleButt.style('background-color', handsCol);
+	juggleButt.mousePressed(function(){
+		socket.emit('buttPress', 'juggle');
+	});
+
+
+	clothingoffButt = createButton('take OFF article of clothing');
+	clothingoffButt.style('background-color', handsCol);
+	clothingoffButt.mousePressed(function(){
+		socket.emit('buttPress', 'clothes OFF');
+	});
+
+	clothingonButt = createButton('put ON article of clothing');
+	clothingonButt.style('background-color', handsCol);
+	clothingonButt.mousePressed(function(){
+		socket.emit('buttPress', 'clothes ON');
+	});
 
 	// - - - - - heartbeat
 	socket.on('heartbeat',

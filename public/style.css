@@ -1,6 +1,6 @@
 html, body {
   margin: 5px;
-  /* padding: 5px; */
+  padding: 0;
 }
 canvas {
   display: block;
@@ -8,5 +8,6 @@ canvas {
 button {
   padding: 2px;
   margin: 10px;
-  vertical-align: middle;
+  font-size: 18px;
+  /* vertical-align: middle; WHY */
 }
