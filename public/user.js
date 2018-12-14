@@ -31,10 +31,10 @@ function setup(){
 	// textAlign(CENTER);
 
 	//category colors
-	musclesCol = color(46, 184, 46, 200); //green
-	mouthCol = color(255, 117, 26, 200); //orange
-	skinCol = color(77, 166, 255, 200); //blue
-	handsCol = color(255, 102, 204, 200); //pink
+	musclesCol = color(46, 184, 46, 100); //green
+	mouthCol = color(255, 117, 26, 100); //orange
+	skinCol = color(77, 166, 255, 100); //blue
+	handsCol = color(255, 102, 204, 100); //pink
 
 	//- - - - - - muscles
 	abButt = createButton('Ab Ripper X');

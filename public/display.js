@@ -22,8 +22,10 @@ var command = 'start';
 var now, next, next2, next3, next4, next5; //queue desplay
 
 function setup(){
-  createCanvas(windowWidth/2, 200);
+  createCanvas(windowWidth, windowHeight);
   textAlign(CENTER);
+  rectMode(CENTER);
+
   textSize(height/10);
   background(0,150,50);
   // startButton = createButton('start Game');
@@ -56,16 +58,6 @@ function setup(){
 }
 
 function draw (){
-    noStroke();
-    fill(0, 102, 153);
-    textSize(height/8);
-    rectMode(CENTER);
-    textAlign(CENTER);
-    fill(0,30,100);
-    rect(width/2, height/3, width/2, height/5);
-    fill(0, 51, 183); //dark blue mork
-    // text(queue[0], width/2, height/3);
-
     // timer
     socket.emit('rankCheck?', socket.id);
     clock = int(((timeLimit + timer) - millis()) / 1000);
@@ -95,5 +87,28 @@ function draw (){
     next3.html(queue[3]);
     next4.html(queue[4]);
     next5.html(queue[5]);
+
+    queueBoxes();
+
+}
+
+function queueBoxes(){
+  noStroke();
+
+  fill(255, 25);
+  fill(200, 75);
+  fill(150, 125);
+  fill(100, 175);
+  rect(width/2, 10 * height/24, width - width/10, height/8); //next2
+  fill(50, 225);
+  rect(width/2, 9 * height/24, width - width/15, height/7); //next
+  fill(0);
+  rect(width/2, 2 * height/9, width - width/20, height/6); //now
+
+
+
+
+
+
 
 }

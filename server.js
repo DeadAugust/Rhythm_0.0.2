@@ -115,7 +115,6 @@ io.sockets.on('connection',
       }
     );
 
-
     socket.on('buttPress',
       function(data){
         command = data;
