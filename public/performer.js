@@ -88,4 +88,7 @@ function draw (){
     next5.html(queue[5]);
 
 }
-d
+
+function keyPressed() {
+  socket.emit('next');
+}
