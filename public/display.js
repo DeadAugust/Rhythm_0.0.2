@@ -18,23 +18,17 @@ var command = 'start';
 
 var now, next, next2, next3, next4, next5; //queue desplay
 
-function setup(){
-  createCanvas(windowWidth, windowHeight);
+function setup(){ //1440, 2457, 1140, 2560)
+  console.log(windowWidth, windowHeight, displayWidth, displayHeight);
+  // createCanvas(windowWidth, windowHeight);
+  // createCanvas(displayWidth, displayHeight);
+  createCanvas(1400, 2520); //perfectly sized for external vertical monitor
+
   textAlign(CENTER);
   rectMode(CENTER);
 
   textSize(height/10);
   background(0,150,50);
-  // startButton = createButton('start Game');
-  // startButton.parent('myCanvas');
-  // startButton.position(4* width/5, height/8);
-  // startButton.mousePressed(startGame);
-  // now = createP(' ');
-  // next = createP(' ');
-  // next2 = createP(' ');
-  // next3 = createP(' ');
-  // next4 = createP(' ');
-  // next5 = createP(' ');
 
 
 
@@ -48,6 +42,7 @@ function setup(){
 }
 
 function draw (){
+
     // timer
     background(0,150,50);
     clock = int(millis() / 1000);
