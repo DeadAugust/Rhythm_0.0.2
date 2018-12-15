@@ -1,6 +1,6 @@
 var socket = io();
 
-
+var peebreak = false;
 
 // //debounce
 // var oneTrade = true; //trade debounce;
@@ -16,6 +16,7 @@ var cookieButt, waterButt, lemonButt, breathButt, jalapenoButt;
 var flogButt, shockButt, slapButt;
 var paintButt, juggleButt, clothingoffButt, clothingonButt;
 var stopButt;
+var clothesCount = 7; //starting # of articles of clothing, to prevent nudity :(
 // var ab = 'ab';
 // var foot = 'foot';
 //category colors
@@ -114,7 +115,7 @@ function setup(){
 	});
 
 	//- - - - - - - skin
-	flogButt = createButton('mea flogga'); //too obtuse?
+	flogButt = createButton('no pain no salvation'); //too obtuse?
 	flogButt.style('background-color', skinCol);
 	flogButt.mousePressed(function(){
 		socket.emit('buttPress', 'flog');
@@ -150,36 +151,37 @@ function setup(){
 	clothingoffButt = createButton('take OFF article of clothing');
 	clothingoffButt.style('background-color', handsCol);
 	clothingoffButt.mousePressed(function(){
-		socket.emit('buttPress', 'clothes OFF');
+		if(clothesCount > 1){
+			clothesCount--;
+			socket.emit('buttPress', 'clothes OFF');
+		}
 	});
 
 	clothingonButt = createButton('put ON article of clothing');
 	clothingonButt.style('background-color', handsCol);
 	clothingonButt.mousePressed(function(){
-		socket.emit('buttPress', 'clothes ON');
+		if(clothesCount < 13){
+			clothesCount++;
+			socket.emit('buttPress', 'clothes ON');
+		}
 	});
 
 	// - - - - - heartbeat
 	socket.on('heartbeat',
 		function(data){
-			// atmans = data.atmans;
-			// mapTiles = data.mapTiles;
-			// freeFud = data.freeFud;
+      peebreak = data.peebreak;
 		}
 	);
 }
 
 function draw() {
-// background(200,100,0);
-		// var data = {
-		// 	x: atman.x,
-		// 	y: atman.y,
-		// 	t: tato,
-		// 	m: mork,
-		// 	u: upple,
-		// 	tile: atman.tile
-		// };
-		// socket.emit('update', data);
+	if(peebreak){
+		fill(135, 50);
+		rect(width/2, height/2, width/2, height/2);
+		textSize(72);
+		fill(0);
+		text('PEE BREAK', width/2, height/2);
+	}
 		socket.on('gameOverC',
 			function(){
 				// gameOver = true;

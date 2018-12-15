@@ -2,18 +2,15 @@
 var socket = io();
 
 var queue = [];
+var peebreak = false;
 
 //- - - - - - - timer
 var startTime = false; //timer on/off
-// var timeLimit = 80000; //test timer
-var timeLimit = 120000; //two mins per round
 var timer; //millis tracker
 var clock; //countdown display
 var clockMin;
 var clockSec;
-var spawnTimer = 0;//resets after each spawn
-var nextSpawn = 1;//how long until next spawn
-var spawnFreq = 20;//game-wide scaling for spawn timing
+var clockHour;
 
 
 // var started = false;
@@ -46,6 +43,7 @@ function setup(){
   socket.on('heartbeat',
     function(data){
       queue = data.queue;
+      peebreak = data.peebreak;
     }
   );
 
@@ -59,40 +57,45 @@ function setup(){
 
 function draw (){
     // timer
-    socket.emit('rankCheck?', socket.id);
-    clock = int(((timeLimit + timer) - millis()) / 1000);
+    background(0,150,50);
+    clock = int(millis() / 1000);
     clockMin = int(clock / 60);
     clockSec = int(clock % 60);
+    clockHour = int(clockMin / 60);
     textSize(height/10);
     strokeWeight(4);
     stroke(0);
     fill(255);
-    if (clockSec < 10){
-      text(clockMin + ":0" + clockSec, 5 * width/6, height/7);
+    if (clockSec < 10 && clockMin <10){
+      text(clockHour + ":0" + clockMin + ":0" + clockSec, width/2, height/9);
     }
-    else text(clockMin + ":" + clockSec, 5 * width/6, height/7);
-    if(millis() - timer >= timeLimit){
-      socket.emit('gameOver');
-      console.log('game over');
-      // finalScores = true;
+    else if(clockSec < 10){
+      text(clockHour + ":" + clockMin + ":0" + clockSec, width/2, height/9);
     }
-    // var test = str(queue[0]);
-    // console.log(test);
-    // console.log(queue[0]);
+    else if(clockMin < 10){
+      text(clockHour + ":0" + clockMin + ":" + clockSec, width/2, height/9);
+    }
+    else text(clockHour + ":" + clockMin + ":" + clockSec, width/2, height/9);
 
-    // now.html(test);
-    now.html(queue[0]);
-    next.html(queue[1]);
-    next2.html(queue[2]);
-    next3.html(queue[3]);
-    next4.html(queue[4]);
-    next5.html(queue[5]);
+    // now.html(queue[0]);
+    // next.html(queue[1]);
+    // next2.html(queue[2]);
+    // next3.html(queue[3]);
+    // next4.html(queue[4]);
+    // next5.html(queue[5]);
 
     queueBoxes();
-
+    if(peebreak){
+      fill(200, 255, 0, 150);
+      rect(width/2, height/2, width, height);
+      textSize(82);
+      fill(100, 90, 255);
+      text('PEE BREAK', width/2, height/2);
+    }
 }
 
 function queueBoxes(){
+  //update text
   for (var i = 0; i < 6; i++){
     if(queue[i] == undefined){
       queue[i] = 'needs input';
@@ -104,18 +107,18 @@ function queueBoxes(){
   var next3 = str(queue[3]);
   var next4 = str(queue[4]);
   var next5 = str(queue[5]);
+  //blocks
   noStroke();
-
   fill(255, 25);
-  rect(width/2, 13 * height/24, width - width/2, height/12); //next5
+  rect(width/2, 13 * height/24, width - 2* width/3, height/12); //next5
   fill(200, 75);
-  rect(width/2, 12 * height/24, width - width/3, height/11); //next4
+  rect(width/2, 12 * height/24, width - width/2, height/11); //next4
   fill(150, 125);
-  rect(width/2, 11 * height/24, width - width/4, height/10); //next3
+  rect(width/2, 11 * height/24, width - width/3, height/10); //next3
   fill(100, 175);
-  rect(width/2, 10 * height/24, width - width/5, height/9); //next2
+  rect(width/2, 10 * height/24, width - width/4, height/9); //next2
   fill(50, 225);
-  rect(width/2, 9 * height/24, width - width/10, height/8); //next
+  rect(width/2, 9 * height/24, width - width/5, height/8); //next
   fill(0);
   rect(width/2, 2 * height/9, width - width/20, height/6); //now
   //commands

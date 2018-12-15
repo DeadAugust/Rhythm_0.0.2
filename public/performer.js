@@ -3,7 +3,8 @@ var socket = io();
 
 // var queue = [];
 
-var done;
+var nextCommand;
+var peebreak = false;
 
 
 // var started = false;
@@ -21,9 +22,13 @@ function setup(){
   // startButton.position(4* width/5, height/8);
   // startButton.mousePressed(startGame);
 
-  done = createButton('done, next command');
-  done.mousePressed(function(){
+  nextCommand = createButton('done, next command');
+  nextCommand.mousePressed(function(){
     socket.emit('next');
+  })
+  peebreak = createButton('PEE BREAK');
+  peebreak.mousePressed(function(){
+    socket.emit('peebreak');
   })
 
   // now.style('background-color', );
@@ -75,18 +80,11 @@ function draw (){
       console.log('game over');
       // finalScores = true;
     }
-    // var test = str(queue[0]);
-    // console.log(test);
-    console.log(queue[0]);
-
-    // now.html(test);
-    now.html(queue[0]);
-    next.html(queue[1]);
-    next2.html(queue[2]);
-    next3.html(queue[3]);
-    next4.html(queue[4]);
-    next5.html(queue[5]);
-
+    if(peebreak){
+      background(135);
+      textSize(72);
+      text('PEE BREAK', width/2, height/2);
+    }
 }
 
 function keyPressed() {

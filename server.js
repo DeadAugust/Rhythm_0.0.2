@@ -1,7 +1,7 @@
 
 
 var queue = [];
-
+var peebreak = false;
 /*
  // uncomment for heroku
 // shiffman heroku set up &&
@@ -51,7 +51,8 @@ app.get('/me', function(req,res){
 setInterval(heartbeat, 33);
 function heartbeat(){ //so this is the only thing sent from server???
   var data = {
-    queue: queue
+    queue: queue,
+    peebreak: peebreak
   }
   io.sockets.emit('heartbeat', data);
 }
@@ -127,6 +128,12 @@ io.sockets.on('connection',
     socket.on('next',
       function(){
         queue.splice(0, 1);
+      }
+    );
+
+    socket.on('peebreak',
+      function(){
+        peebreak = !peebreak;
       }
     );
 
