@@ -29,14 +29,12 @@ function setup(){
   // startButton.parent('myCanvas');
   // startButton.position(4* width/5, height/8);
   // startButton.mousePressed(startGame);
-  now = createP(' ');
-  next = createP(' ');
-  next2 = createP(' ');
-  next3 = createP(' ');
-  next4 = createP(' ');
-  next5 = createP(' ');
-
-  // now.style('background-color', );
+  // now = createP(' ');
+  // next = createP(' ');
+  // next2 = createP(' ');
+  // next3 = createP(' ');
+  // next4 = createP(' ');
+  // next5 = createP(' ');
 
 
 
@@ -47,12 +45,6 @@ function setup(){
     }
   );
 
-//   socket.on('newCommand',
-//     function(data){
-//       queue = data;
-//       console.log(queue);
-//     });
-// }
 }
 
 function draw (){

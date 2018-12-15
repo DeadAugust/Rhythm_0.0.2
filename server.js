@@ -2,6 +2,10 @@
 
 var queue = [];
 var peebreak = false;
+var mouthButts = [];
+var meatButts = [];
+var skinButts = [];
+var handButts = [];
 /*
  // uncomment for heroku
 // shiffman heroku set up &&
@@ -52,7 +56,11 @@ setInterval(heartbeat, 33);
 function heartbeat(){ //so this is the only thing sent from server???
   var data = {
     queue: queue,
-    peebreak: peebreak
+    peebreak: peebreak,
+    mouthButts: mouthButts,
+    meatButts: meatButts,
+    skinButts: skinButts,
+    handButts: handButts
   }
   io.sockets.emit('heartbeat', data);
 }
