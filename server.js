@@ -62,7 +62,7 @@ stats.push(clothingoffStats);
 var clothingonStats = new Stats('clothes ON');
 stats.push(clothingonStats);
 console.log(stats);
-/*
+
  // uncomment for heroku
 // shiffman heroku set up &&
 // socket.io set up tutorial
@@ -78,8 +78,8 @@ app.use(express.static('public'));
 http.listen(port, function(){
   console.log('listening on ' + port);
 })
-*/
 
+/*
 //for local dev
 var express = require('express');
 var app = express();
@@ -91,8 +91,7 @@ app.use(express.static('public'));
 console.log('Socket server running');
 
 var io = require('socket.io')(server);
-// var shared = io.of('/sharedScreen')
-
+*/
 //new
 var path = require('path');
 
