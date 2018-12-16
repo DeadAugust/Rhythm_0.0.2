@@ -227,9 +227,11 @@ function setup(){
 	menuButt = createButton('Menu');
 	menuButt.style('background-color', menuCol);
 	menuButt.mousePressed(function(){
-		removeButts();
-		menu = true;
-		oneButt = false;
+		if (event.type != 'touchstart'){
+			removeButts();
+			menu = true;
+			oneButt = false;
+		}
 	});
 
 	// mouthButts.push(menuButt);
