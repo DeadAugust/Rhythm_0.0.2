@@ -243,53 +243,65 @@ function setup(){
 	mouthButt = createButton('MOUTH');
 	mouthButt.style('background-color', mouthCol);
 	mouthButt.mousePressed(function(){
-		removeButts();
-		mouthMenu = true;
-		oneButt = false;
+		if (event.type != 'touchstart'){
+			removeButts();
+			mouthMenu = true;
+			oneButt = false;
+		}
 	});
 	menuButts.push(mouthButt);
 
 	meatButt = createButton('MEAT');
 	meatButt.style('background-color', meatCol);
 	meatButt.mousePressed(function(){
-		removeButts();
-		meatMenu = true;
-		oneButt = false;
+		if (event.type != 'touchstart'){
+			removeButts();
+			meatMenu = true;
+			oneButt = false;
+		}
 	});
 	menuButts.push(meatButt);
 
 	skinButt = createButton('SKIN');
 	skinButt.style('background-color', skinCol);
 	skinButt.mousePressed(function(){
-		removeButts();
-		skinMenu = true;
-		oneButt = false;
+		if (event.type != 'touchstart'){
+			removeButts();
+			skinMenu = true;
+			oneButt = false;
+		}
 	});
 	menuButts.push(skinButt);
 
 	handButt = createButton('HANDS');
 	handButt.style('background-color', handsCol);
 	handButt.mousePressed(function(){
-		removeButts();
-		handMenu = true;
-		oneButt = false;
+		if (event.type != 'touchstart'){
+			removeButts();
+			handMenu = true;
+			oneButt = false;
+		}
 	});
 	menuButts.push(handButt);
 
 	statsButt = createButton('Stats');
 	statsButt.style('background-color', menuCol);
 	statsButt.mousePressed(function(){
-		removeButts();
-		stats = true;
-		oneButt = false;
+		if (event.type != 'touchstart'){
+			removeButts();
+			stats = true;
+			oneButt = false;
+		}
 	});
 	menuButts.push(statsButt);
 
 	stopButt = createButton('STOP PERFORMANCE');
 	stopButt.style('background-color', stopCol);
 	stopButt.mousePressed(function(){
-		oneStop = true;
-		socket.emit('stop request');
+		if (event.type != 'touchstart'){
+			oneStop = true;
+			socket.emit('stop request');
+		}
 	});
 
 	removeButts();
