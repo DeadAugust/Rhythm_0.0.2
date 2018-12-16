@@ -7,7 +7,9 @@ var peebreak = false;
 // var lastTrade = 0;
 // var lastButt = 0;
 // var debounce = 800;
-
+var stats = [];
+var statPs = [];
+var statsDiv;
 var mouthButts = [];
 var meatButts = [];
 var skinButts = [];
@@ -50,6 +52,9 @@ function setup(){
 	}
 	*/
 
+	// statsDiv = createDiv('stats');
+	// statsDiv.hide();
+
 	//category colors
 	meatCol = color(46, 184, 46, 100); //green
 	mouthCol = color(255, 117, 26, 100); //orange
@@ -64,7 +69,7 @@ function setup(){
 	meatMenu = true;
 	skinMenu = true;
 	handMenu = true;
-	stats = false;
+	statsMenu = false;
 
 
 	//- - - - - - - mouth
@@ -73,7 +78,7 @@ function setup(){
 	cookieButt.parent('myCanvas');
 	cookieButt.mousePressed(function(){
 		if (event.type != 'touchstart'){
-			socket.emit('buttPress', 'cookie');
+			socket.emit('buttPress', 'eat cookie');
 		}
 	});
 	mouthButts.push(cookieButt);
@@ -83,7 +88,7 @@ function setup(){
 	waterButt.style('background-color', mouthCol);
 	waterButt.mousePressed(function(){
 		if (event.type != 'touchstart'){
-			socket.emit('buttPress', 'water');
+			socket.emit('buttPress', 'drink water');
 		}
 	});
 	mouthButts.push(waterButt);
@@ -93,7 +98,7 @@ function setup(){
 	lemonButt.style('background-color', mouthCol);
 	lemonButt.mousePressed(function(){
 		if (event.type != 'touchstart'){
-			socket.emit('buttPress', 'lemon');
+			socket.emit('buttPress', 'suck lime');
 		}
 	});
 	mouthButts.push(lemonButt);
@@ -103,7 +108,7 @@ function setup(){
 	breathButt.style('background-color', mouthCol);
 	breathButt.mousePressed(function(){
 		if (event.type != 'touchstart'){
-			socket.emit('buttPress', 'breath');
+			socket.emit('buttPress', 'take breath');
 		}
 	});
 	mouthButts.push(breathButt);
@@ -113,7 +118,7 @@ function setup(){
 	jalapenoButt.style('background-color', mouthCol);
 	jalapenoButt.mousePressed(function(){
 		if (event.type != 'touchstart'){
-			socket.emit('buttPress', 'jalapeno');
+			socket.emit('buttPress', 'chomp pepper');
 		}
 	});
 	mouthButts.push(jalapenoButt);
@@ -124,7 +129,7 @@ function setup(){
 	abButt.style('background-color', meatCol);
 	abButt.mousePressed(function(){
 		if (event.type != 'touchstart'){
-			socket.emit('buttPress', 'ab');
+			socket.emit('buttPress', 'ab workout');
 		}
 	});
 	meatButts.push(abButt);
@@ -184,7 +189,7 @@ function setup(){
 	flogButt.style('background-color', skinCol);
 	flogButt.mousePressed(function(){
 		if (event.type != 'touchstart'){
-			socket.emit('buttPress', 'flog');
+			socket.emit('buttPress', 'flog self');
 		}
 	});
 	skinButts.push(flogButt);
@@ -194,7 +199,7 @@ function setup(){
 	shockButt.style('background-color', skinCol);
 	shockButt.mousePressed(function(){
 		if (event.type != 'touchstart'){
-			socket.emit('buttPress', 'shock');
+			socket.emit('buttPress', 'shock face');
 		}
 	});
 	skinButts.push(shockButt);
@@ -204,7 +209,7 @@ function setup(){
 	slapButt.style('background-color', skinCol);
 	slapButt.mousePressed(function(){
 		if (event.type != 'touchstart'){
-			socket.emit('buttPress', 'slap');
+			socket.emit('buttPress', 'slap face');
 		}
 	});
 	skinButts.push(slapButt);
@@ -216,7 +221,7 @@ function setup(){
 	paintButt.style('background-color', handsCol);
 	paintButt.mousePressed(function(){
 		if (event.type != 'touchstart'){
-			socket.emit('buttPress', 'paint');
+			socket.emit('buttPress', 'paint body');
 		}
 	});
 	handButts.push(paintButt);
@@ -226,7 +231,7 @@ function setup(){
 	juggleButt.style('background-color', handsCol);
 	juggleButt.mousePressed(function(){
 		if (event.type != 'touchstart'){
-			socket.emit('buttPress', 'juggle');
+			socket.emit('buttPress', 'juggle dildos');
 		}
 	});
 	handButts.push(juggleButt);
@@ -325,7 +330,7 @@ function setup(){
 	statsButt.mousePressed(function(){
 		if (event.type != 'touchstart'){
 			removeButts();
-			stats = true;
+			statsMenu = true;
 			oneButt = false;
 		}
 	});
@@ -336,6 +341,7 @@ function setup(){
 	stopButt.mousePressed(function(){
 		if (event.type != 'touchstart'){
 			oneStop = true;
+			var stopped = createP('Stop Command Received. Will end once three such commands are given.');
 			socket.emit('stop request');
 		}
 	});
@@ -355,13 +361,14 @@ function setup(){
 			// console.log('heartbeat');
 			clothesCount = data.clothesCount;
 			stopPerformance = data.stopPerformance;
+			stats = data.stats;
 		}
 	);
 
-	socket.on('drop',
-		function(data){
-
-		})
+	// socket.on('drop',
+	// 	function(data){
+	//
+	// 	})
 }
 
 function draw() {
@@ -434,6 +441,13 @@ function removeButts(){
 		handMenu = false;
 		menuButt.hide();
 	}
+	if(statsMenu){
+		// statsDiv.remove();
+		for (var i = statPs.length -1; i >= 0; i--){
+			statPs[i].hide();
+		}
+		statsMenu = false;
+	}
 }
 
 function showButts(){
@@ -481,7 +495,16 @@ function showButts(){
 			handButts[i].show();
 		}
 	}
-	if(stats){
+	if(statsMenu){
 		menuButt.show();
+		showStats();
+	}
+}
+
+function showStats(){
+	// statsDiv = createDiv('stats');
+	for (var i = 0; i < stats.length; i++){
+		var stat = createP(stats[i].name + ': ' + stats[i].count);
+		statPs.push(stat);
 	}
 }

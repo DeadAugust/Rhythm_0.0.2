@@ -16,6 +16,53 @@ var stopLimit = 3;
 var end = false;
 
 
+//- - - - - stats
+
+function Stats(name){
+  this.name = name;
+  this.count = 0;
+}
+
+var stats = [];
+var cookieStats = new Stats('eat cookie');
+stats.push(cookieStats);
+// console.log(stats);
+var waterStats = new Stats('drink water');
+stats.push(waterStats);
+var limeStats = new Stats('suck lime');
+stats.push(limeStats);
+var breathStats = new Stats('take breath');
+stats.push(breathStats);
+var pepperStats = new Stats('chomp pepper');
+stats.push(pepperStats);
+var abStats = new Stats('ab workout');
+stats.push(abStats);
+var handstandStats = new Stats('handstand');
+stats.push(handstandStats);
+var pushupStats = new Stats('pushup');
+stats.push(pushupStats);
+var squatStats = new Stats('squat');
+stats.push(squatStats);
+var dabStats = new Stats('dab');
+stats.push(dabStats);
+var stretchStats = new Stats('stretch');
+stats.push(stretchStats);
+var flogStats = new Stats('flog self');
+stats.push(flogStats);
+var shockStats = new Stats('shock face');
+stats.push(shockStats);
+var slapStats = new Stats('slap face');
+stats.push(slapStats);
+var paintStats = new Stats('paint body');
+stats.push(paintStats);
+var juggleStats = new Stats('juggle dildos');
+stats.push(juggleStats);
+var clothingoffStats = new Stats('clothes OFF');
+stats.push(clothingoffStats);
+var clothingonStats = new Stats('clothes ON');
+stats.push(clothingonStats);
+console.log(stats);
+/*
  // uncomment for heroku
 // shiffman heroku set up &&
 // socket.io set up tutorial
@@ -31,8 +78,8 @@ app.use(express.static('public'));
 http.listen(port, function(){
   console.log('listening on ' + port);
 })
+*/
 
-/*
 //for local dev
 var express = require('express');
 var app = express();
@@ -45,7 +92,7 @@ console.log('Socket server running');
 
 var io = require('socket.io')(server);
 // var shared = io.of('/sharedScreen')
-*/
+
 //new
 var path = require('path');
 
@@ -75,7 +122,8 @@ function heartbeat(){ //so this is the only thing sent from server???
     handButts: handButts,
     clothesCount: clothesCount,
     stopPerformance: stopPerformance,
-    end: end
+    end: end,
+    stats: stats
   }
   io.sockets.emit('heartbeat', data);
   // console.log(data);
@@ -130,6 +178,12 @@ io.sockets.on('connection',
         }
         console.log(command);
         queue.push(command);
+        for (var i = 0; i < stats.length; i++){
+          if(command == stats[i].name){
+            stats[i].count++;
+          }
+        }
+        console.log(stats);
         // socket.broadcast.emit('newCommand', queue);
       }
     );

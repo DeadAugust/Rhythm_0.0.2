@@ -15,6 +15,8 @@ var clockHour;
 
 var ding;
 
+var stats = [];
+
 // var started = false;
 var command = 'start';
 var end = false;
@@ -45,6 +47,7 @@ function setup(){ //1440, 2457, 1140, 2560)
       queue = data.queue;
       peebreak = data.peebreak;
       end = data.end;
+      stats = data.stats;
     }
   );
 
@@ -66,7 +69,8 @@ function draw (){
       strokeWeight(10);
       textSize(150);
       fill(255, 255, 255);
-      text('STOP', width/2, height/2);
+      text('END', width/2, 5* height/10);
+      text('PERFORMANCE', width/2, 6 * height/10);
       oneEnd = true;
     }
   }
@@ -96,7 +100,7 @@ function draw (){
     if(peebreak){
       fill(200, 255, 0, 150);
       rect(width/2, height/2, width, height);
-      textSize(82);
+      textSize(width/7);
       fill(100, 90, 255);
       text('PEE BREAK', width/2, height/2);
     }
@@ -133,7 +137,7 @@ function queueBoxes(){
   fill(0);
   rect(width/2, 2 * height/9, width - width/20, height/6); //now
   //commands
-  textSize(100);
+  textSize(width/7);
   fill(255);
   if(queue[0] == undefined){
     // console.log('this');
@@ -142,7 +146,7 @@ function queueBoxes(){
   else{
     text(now, width/2,  9 * height/36);
   }
-  textSize(50);
+  textSize(width/10);
   fill(200, 200);
   if(queue[1] == undefined){
     text('needs input', width/2, 9* height/24);
@@ -150,7 +154,7 @@ function queueBoxes(){
   else{
     text(next, width/2, 9* height/24);
   }
-  textSize(40);
+  textSize(width/12);
   fill(150, 150);
   if(queue[2] == undefined){
     text('needs input', width/2, 10 * height/24);
@@ -158,7 +162,7 @@ function queueBoxes(){
   else{
     text(next2, width/2, 10 * height/24);
   }
-  textSize(30);
+  textSize(width/15);
   fill(150, 100);
   if(queue[3] == undefined){
     text('needs input', width/2, 11 * height/24);
@@ -166,7 +170,7 @@ function queueBoxes(){
   else{
     text(next3, width/2, 11 * height/24);
   }
-  textSize(20);
+  textSize(width/20);
   fill(50, 50);
   if(queue[4] == undefined){
     text('needs input', width/2, 12 * height/24);
@@ -174,7 +178,7 @@ function queueBoxes(){
   else{
     text(next4, width/2, 12 * height/24);
   }
-  textSize(10);
+  textSize(width/25);
   fill(25, 25);
   if(queue[5] == undefined){
     text('needs input', width/2, 13 * height/24);
@@ -192,6 +196,7 @@ function queueBoxes(){
   else{
     fill(0,100,170);
     ellipse(1140, 1500, 200, 200);
+    lastQueueLength = queue.length;
   }
   textSize(width/15);
   stroke(0);
@@ -203,6 +208,9 @@ function queueBoxes(){
   textSize(width/25);
   fill(0,50,150);
   text('Total in Queue', 4 * width/5, 16 * height/24);
+
+  textSize(width/10);
+  text('augustluhrs.art/play', width/2, 19* height/20);
 
 
 

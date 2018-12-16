@@ -2,7 +2,7 @@
 var socket = io();
 
 var queue = [];
-
+var stats = [];
 var nextCommand;
 var peebreak = false;
 
@@ -356,6 +356,7 @@ function setup(){
     function(data){
       clothesCount = data.clothesCount;
       queue = data.queue;
+      stats = data.stats;
     }
   );
 
