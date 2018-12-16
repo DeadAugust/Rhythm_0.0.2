@@ -13,6 +13,7 @@ var clockMin;
 var clockSec;
 var clockHour;
 
+var ding;
 
 // var started = false;
 var command = 'start';
@@ -21,6 +22,9 @@ var oneEnd = false;
 
 var now, next, next2, next3, next4, next5; //queue desplay
 
+function preload(){
+  ding = loadSound('ding.mp3');
+}
 function setup(){ //1440, 2457, 1140, 2560)
   console.log(windowWidth, windowHeight, displayWidth, displayHeight);
   // createCanvas(windowWidth, windowHeight);
@@ -32,6 +36,7 @@ function setup(){ //1440, 2457, 1140, 2560)
 
   textSize(height/10);
   background(0,150,50);
+
 
 
 
@@ -69,9 +74,9 @@ function draw (){
     // timer
     background(0,150,50);
     clock = int(millis() / 1000);
-    clockMin = int(clock / 60);
+    clockMin = int(clock / 60) - (clockHour * 3600);
     clockSec = int(clock % 60);
-    clockHour = int(clockMin / 60);
+    clockHour = int(clock / 3600);
     textSize(height/10);
     strokeWeight(4);
     stroke(0);
@@ -148,6 +153,7 @@ function queueBoxes(){
   text(next5, width/2, 13 * height/24);
   //queue total indicator
   if(queue.length !== lastQueueLength){
+    ding.play();
     fill(255,255,0);
     ellipse(1140, 1500, 200, 200);
     lastQueueLength = queue.length;
@@ -161,7 +167,8 @@ function queueBoxes(){
   strokeWeight(10);
   fill(255);
   text(queue.length, 1140, 1530);
-  noStroke();
+  stroke(0);
+  strokeWeight(2);
   textSize(width/25);
   fill(0,50,150);
   text('Total in Queue', 4 * width/5, 16 * height/24);
