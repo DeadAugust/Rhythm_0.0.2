@@ -15,7 +15,7 @@ var stopCount = 0;
 var stopLimit = 3;
 var end = false;
 
-/*
+
  // uncomment for heroku
 // shiffman heroku set up &&
 // socket.io set up tutorial
@@ -31,8 +31,8 @@ app.use(express.static('public'));
 http.listen(port, function(){
   console.log('listening on ' + port);
 })
-*/
 
+/*
 //for local dev
 var express = require('express');
 var app = express();
@@ -45,7 +45,7 @@ console.log('Socket server running');
 
 var io = require('socket.io')(server);
 // var shared = io.of('/sharedScreen')
-
+*/
 //new
 var path = require('path');
 
