@@ -2,10 +2,15 @@
 
 var queue = [];
 var peebreak = false;
+
 var mouthButts = [];
 var meatButts = [];
 var skinButts = [];
 var handButts = [];
+var menuButts = [];
+
+
+
 /*
  // uncomment for heroku
 // shiffman heroku set up &&
@@ -52,17 +57,21 @@ app.get('/me', function(req,res){
   res.sendFile(path.join(__dirname + '/public/indexPerformer.html'));
 });
 
+
+
 setInterval(heartbeat, 33);
 function heartbeat(){ //so this is the only thing sent from server???
   var data = {
     queue: queue,
     peebreak: peebreak,
+    menuButts: menuButts,
     mouthButts: mouthButts,
     meatButts: meatButts,
     skinButts: skinButts,
     handButts: handButts
   }
   io.sockets.emit('heartbeat', data);
+  // console.log(data);
 }
 
 //- - - - - - - game states
@@ -95,32 +104,11 @@ io.sockets.on('connection',
 
     socket.on('update',
       function(data){
-        // if (atmans.length >= 2){ //so only starts if at least 2 players?
-        //   var atman;
-        //   totalTatos = 0;
-        //   totalMorks = 0;
-        //   totalUpples = 0;
-        //   totalFud = 0;
-        //   for (var i = 0; i < atmans.length; i++){
-        //     if (socket.id == atmans[i].id){
-        //       atman = atmans[i]; //why in front?
-        //       atman.x = data.x;
-        //       atman.y = data.y;
-        //       atman.t = data.t;
-        //       atman.m = data.m;
-        //       atman.u = data.u;
-        //       atman.tile = data.tile;
-        //     }
-        //     totalTatos += atmans[i].t;
-        //     totalMorks += atmans[i].m;
-        //     totalUpples += atmans[i].u;
-        //   }
-        //   totalFud = totalTatos + totalMorks + totalUpples;
-        //   // console.log(totalFud, totalTatos, totalMorks, totalUpples);
-        //   rank();
-          // console.log(tatoRank, morkRank, uppleRank);
-
-        // }
+        menuButts = data.menuButts;
+  			mouthButts = data.mouthButts;
+  			meatButts = data.meatButts;
+  			skinButts = data.skinButts;
+  			handButts = data.handButts;
       }
     );
 

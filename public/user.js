@@ -8,12 +8,11 @@ var peebreak = false;
 // var lastButt = 0;
 // var debounce = 800;
 
-// var buttons = [];
-var butt;
 var mouthButts = [];
 var meatButts = [];
 var skinButts = [];
 var handButts = [];
+var menuButts = [];
 var mouthButt, meatButt, skinButt, handButt, menuButt, statsButt;
 var mouthMenu, meatMenu, skinMenu, handMenu, menu;
 var abButt, footButt, handstandButt, pushupButt, squatButt, dabButt, stretchButt;
@@ -23,18 +22,17 @@ var paintButt, juggleButt, clothingoffButt, clothingonButt;
 var oneButt; //to rule them all
 var stopButt;
 var clothesCount = 7; //starting # of articles of clothing, to prevent nudity :(
-// var ab = 'ab';
-// var foot = 'foot';
+
 //category colors
-var musclesCol, mouthCol, skinCol, handsCol, menuCol;
+var meatCol, mouthCol, skinCol, handsCol, menuCol;
 
 function setup(){
-	// noCanvas();
+	noCanvas();
 	//- - - - - overall
-	var screenSize = windowHeight - 100;
-	var canvas = createCanvas(int(screenSize * .666), screenSize);
- 	canvas.parent('myCanvas');
-	background(0, 150, 50);
+	// var screenSize = windowHeight - 100;
+	// var canvas = createCanvas(int(screenSize * .666), screenSize);
+ 	// canvas.parent('myCanvas');
+	// background(0, 150, 50);
 
 /* variable width buttons
 	textSize(height/(8 + atmanRanks.length));
@@ -46,7 +44,7 @@ function setup(){
 	*/
 
 	//category colors
-	musclesCol = color(46, 184, 46, 100); //green
+	meatCol = color(46, 184, 46, 100); //green
 	mouthCol = color(255, 117, 26, 100); //orange
 	skinCol = color(77, 166, 255, 100); //blue
 	handsCol = color(255, 102, 204, 100); //pink
@@ -54,56 +52,21 @@ function setup(){
 
 	//starting menus
 	menu = true;
-	mouthMenu = false;
-	meatMenu = false;
-	skinMenu = false;
-	handMenu = false;
+	mouthMenu = true;
+	meatMenu = true;
+	skinMenu = true;
+	handMenu = true;
 	stats = false;
 
-	//- - - - - - meat
-	abButt = createButton('Ab Ripper X');
-	abButt.style('background-color', musclesCol);
-	abButt.mousePressed(function(){
-		socket.emit('buttPress', 'ab');
-	});
-
-	handstandButt = createButton('invert body');
-	handstandButt.style('background-color', musclesCol);
-	handstandButt.mousePressed(function(){
-		socket.emit('buttPress', 'handstand');
-	});
-
-	pushupButt = createButton('push the earth away');
-	pushupButt.style('background-color', musclesCol);
-	pushupButt.mousePressed(function(){
-		socket.emit('buttPress', 'pushup');
-	});
-
-	squatButt = createButton('accrue thigh mass');
- 	squatButt.style('background-color', musclesCol);
- 	squatButt.mousePressed(function(){
- 		socket.emit('buttPress', 'squat');
- 	});
-
-
-	dabButt = createButton('#dab');
- 	dabButt.style('background-color', musclesCol);
- 	dabButt.mousePressed(function(){
- 		socket.emit('buttPress', 'dab');
- 	});
-
-	stretchButt = createButton('stretch, for your health');
-	stretchButt.style('background-color', musclesCol);
-	stretchButt.mousePressed(function(){
-		socket.emit('buttPress', 'stretch');
-	});
 
 	//- - - - - - - mouth
 	cookieButt = createButton('nom on a cookie');
 	cookieButt.style('background-color', mouthCol);
+	cookieButt.parent('myCanvas');
 	cookieButt.mousePressed(function(){
 		socket.emit('buttPress', 'cookie');
 	});
+	mouthButts.push(cookieButt);
 
 
 	waterButt = createButton('slurp some water');
@@ -111,25 +74,80 @@ function setup(){
 	waterButt.mousePressed(function(){
 		socket.emit('buttPress', 'water');
 	});
+	mouthButts.push(waterButt);
 
 
-	lemonButt = createButton('suckle a lemon');
+	lemonButt = createButton('suckle a lime');
 	lemonButt.style('background-color', mouthCol);
 	lemonButt.mousePressed(function(){
 		socket.emit('buttPress', 'lemon');
 	});
+	mouthButts.push(lemonButt);
+
 
 	breathButt = createButton('find a deep breath');
 	breathButt.style('background-color', mouthCol);
 	breathButt.mousePressed(function(){
 		socket.emit('buttPress', 'breath');
 	});
+	mouthButts.push(breathButt);
 
-	jalapenoButt = createButton('chomp on a jalapeno');
+
+	jalapenoButt = createButton('pepper chomp');
 	jalapenoButt.style('background-color', mouthCol);
 	jalapenoButt.mousePressed(function(){
 		socket.emit('buttPress', 'jalapeno');
 	});
+	mouthButts.push(jalapenoButt);
+
+
+	//- - - - - - meat
+	abButt = createButton('Ab Ripper X');
+	abButt.style('background-color', meatCol);
+	abButt.mousePressed(function(){
+		socket.emit('buttPress', 'ab');
+	});
+	meatButts.push(abButt);
+
+
+	handstandButt = createButton('invert body');
+	handstandButt.style('background-color', meatCol);
+	handstandButt.mousePressed(function(){
+		socket.emit('buttPress', 'handstand');
+	});
+	meatButts.push(handstandButt);
+
+	pushupButt = createButton('push the earth away');
+	pushupButt.style('background-color', meatCol);
+	pushupButt.mousePressed(function(){
+		socket.emit('buttPress', 'pushup');
+	});
+	meatButts.push(pushupButt);
+
+
+	squatButt = createButton('accrue thigh mass');
+	squatButt.style('background-color', meatCol);
+	squatButt.mousePressed(function(){
+		socket.emit('buttPress', 'squat');
+	});
+	meatButts.push(squatButt);
+
+
+	dabButt = createButton('#dab');
+	dabButt.style('background-color', meatCol);
+	dabButt.mousePressed(function(){
+		socket.emit('buttPress', 'dab');
+	});
+	meatButts.push(dabButt);
+
+
+	stretchButt = createButton('stretch, for your health');
+	stretchButt.style('background-color', meatCol);
+	stretchButt.mousePressed(function(){
+		socket.emit('buttPress', 'stretch');
+	});
+	meatButts.push(stretchButt);
+
 
 	//- - - - - - - skin
 	flogButt = createButton('no pain no salvation'); //too obtuse?
@@ -137,18 +155,24 @@ function setup(){
 	flogButt.mousePressed(function(){
 		socket.emit('buttPress', 'flog');
 	});
+	skinButts.push(flogButt);
+
 
 	shockButt = createButton('Shock face');
 	shockButt.style('background-color', skinCol);
 	shockButt.mousePressed(function(){
 		socket.emit('buttPress', 'shock');
 	});
+	skinButts.push(shockButt);
+
 
 	slapButt = createButton('slap yourself');
 	slapButt.style('background-color', skinCol);
 	slapButt.mousePressed(function(){
 		socket.emit('buttPress', 'slap');
 	});
+	skinButts.push(slapButt);
+
 
 	//- - - - - - - hands
 
@@ -157,12 +181,16 @@ function setup(){
 	paintButt.mousePressed(function(){
 		socket.emit('buttPress', 'paint');
 	});
+	handButts.push(paintButt);
+
 
 	juggleButt = createButton('juggle dildos');
 	juggleButt.style('background-color', handsCol);
 	juggleButt.mousePressed(function(){
 		socket.emit('buttPress', 'juggle');
 	});
+	handButts.push(juggleButt);
+
 
 
 	clothingoffButt = createButton('take OFF article of clothing');
@@ -173,16 +201,21 @@ function setup(){
 			socket.emit('buttPress', 'clothes OFF');
 		}
 	});
+	handButts.push(clothingoffButt);
+
 
 	clothingonButt = createButton('put ON article of clothing');
 	clothingonButt.style('background-color', handsCol);
 	clothingonButt.mousePressed(function(){
-		if(clothesCount < 13){
+		if(clothesCount < 14){
 			clothesCount++;
 			socket.emit('buttPress', 'clothes ON');
 		}
 	});
+	handButts.push(clothingonButt);
 
+
+	//- - - - - -  menus
 	menuButt = createButton('Menu');
 	menuButt.style('background-color', menuCol);
 	menuButt.mousePressed(function(){
@@ -190,7 +223,13 @@ function setup(){
 		menu = true;
 		oneButt = false;
 	});
-/*
+
+	// mouthButts.push(menuButt);
+	// meatButts.push(menuButt);
+	// skinButts.push(menuButt);
+	// handButts.push(menuButt);
+
+
 	mouthButt = createButton('MOUTH');
 	mouthButt.style('background-color', mouthCol);
 	mouthButt.mousePressed(function(){
@@ -198,6 +237,7 @@ function setup(){
 		mouthMenu = true;
 		oneButt = false;
 	});
+	menuButts.push(mouthButt);
 
 	meatButt = createButton('MEAT');
 	meatButt.style('background-color', meatCol);
@@ -206,6 +246,7 @@ function setup(){
 		meatMenu = true;
 		oneButt = false;
 	});
+	menuButts.push(meatButt);
 
 	skinButt = createButton('SKIN');
 	skinButt.style('background-color', skinCol);
@@ -214,6 +255,7 @@ function setup(){
 		skinMenu = true;
 		oneButt = false;
 	});
+	menuButts.push(skinButt);
 
 	handButt = createButton('HANDS');
 	handButt.style('background-color', handsCol);
@@ -222,34 +264,49 @@ function setup(){
 		handMenu = true;
 		oneButt = false;
 	});
+	menuButts.push(handButt);
 
-	statsButt = createButton('Menu');
+	statsButt = createButton('Stats');
 	statsButt.style('background-color', menuCol);
 	statsButt.mousePressed(function(){
 		removeButts();
 		stats = true;
 		oneButt = false;
 	});
-	*/
+	menuButts.push(statsButt);
 
+	// menuButt = createButton('Menu');
+	// menuButt.style('background-color', menuCol);
+	// menuButt.mousePressed(function(){
+	// 	removeButts();
+	// 	menu = true;
+	// 	oneButt = false;
+	// });
+
+	removeButts();
+
+	menu = true;
 	// - - - - - heartbeat
 	socket.on('heartbeat',
 		function(data){
-      peebreak = data.peebreak;
-			mouthButts = data.mouthButts;
-			meatButts = data.meatButts;
-			skinButts = data.skinButts;
-			handButts = data.handButts;
+      // peebreak = data.peebreak;
+			// menuButts = data.menuButts;
+			// mouthButts = data.mouthButts;
+			// meatButts = data.meatButts;
+			// skinButts = data.skinButts;
+			// handButts = data.handButts;
+			// console.log('heartbeat');
 		}
 	);
 }
 
 function draw() {
-	if (menu){
-		if(!oneButt){
-			mainMenu();
-			oneButt = true;
-		}
+	if(!oneButt){
+		console.log(mouthMenu, mouthButts, 'mouth');
+		console.log(menu, menuButts, 'menu');
+		showButts();
+		// console.log(mouthMenu, mouthButts, 'mouth after');
+		oneButt = true;
 	}
 
 	if(peebreak){
@@ -259,98 +316,101 @@ function draw() {
 		fill(0);
 		text('PEE BREAK', width/2, height/2);
 	}
-		socket.on('gameOverC',
-			function(){
-				// gameOver = true;
-			}
-		);
+
 }
 
-function buttPress(butt){
-	socket.emit('buttPress', butt);
-	// 	function(){
-	// 		var data = butt;
-	// 	}
-	// );
+// function buttPress(butt){
+// 	socket.emit('buttPress', butt);
+// }
+function mousePressed(){
+	console.log('mouth', mouthButts, 'skin', skinButts);
 }
 
 function removeButts(){
+	if(menu){
+		for (var i = menuButts.length -1; i >= 0; i--){
+			menuButts[i].hide();
+		}
+		menu = false;
+	}
 	if(mouthMenu){
 		for (var i = mouthButts.length -1; i >= 0; i--){
-			mouthButts[i].remove();
+			mouthButts[i].hide();
 		}
 		mouthMenu = false;
+		menuButt.hide();
 	}
 	if(meatMenu){
 		for (var i = meatButts.length -1; i >= 0; i--){
-			meatButts[i].remove();
+			meatButts[i].hide();
 		}
 		meatMenu = false;
+		menuButt.hide();
+
 	}
 	if(skinMenu){
 		for (var i = skinButts.length -1; i >= 0; i--){
-			skinButts[i].remove();
+			skinButts[i].hide();
 		}
 		skinMenu = false;
+		menuButt.hide();
+
 	}
 	if(handMenu){
 		for (var i = handButts.length -1; i >= 0; i--){
-			handButts[i].remove();
+			handButts[i].hide();
 		}
 		handMenu = false;
-	}
-	if(menu){
-		mouthButt.remove();
-		meatButt.remove();
-		skinButt.remove();
-		handButt.remove();
-		statsButt.remove();
-		menu = false;
+		menuButt.hide();
 	}
 }
 
-function mainMenu(){
-	mouthButt = createButton('MOUTH');
-	mouthButt.style('background-color', mouthCol);
-	mouthButt.parent('myCanvas');
-	mouthButt.mousePressed(function(){
-		removeButts();
-		mouthMenu = true;
-		oneButt = false;
-	});
-
-	meatButt = createButton('MEAT');
-	meatButt.style('background-color', meatCol);
-	meatButt.parent('myCanvas');
-	meatButt.mousePressed(function(){
-		removeButts();
-		meatMenu = true;
-		oneButt = false;
-	});
-
-	skinButt = createButton('SKIN');
-	skinButt.style('background-color', skinCol);
-	skinButt.parent('myCanvas');
-	skinButt.mousePressed(function(){
-		removeButts();
-		skinMenu = true;
-		oneButt = false;
-	});
-
-	handButt = createButton('HANDS');
-	handButt.style('background-color', handsCol);
-	handButt.parent('myCanvas');
-	handButt.mousePressed(function(){
-		removeButts();
-		handMenu = true;
-		oneButt = false;
-	});
-
-	statsButt = createButton('Menu');
-	statsButt.style('background-color', menuCol);
-	statsButt.mousePressed(function(){
-		removeButts();
-		stats = true;
-		oneButt = false;
-	});
+function showButts(){
+	// menuButt.style('background-color', menuCol);
+	// mouthButt.style('background-color', mouthCol);
+	// meatButt.style('background-color', meatCol);
+	// skinButt.style('background-color', skinCol);
+	// handButt.style('background-color', handsCol);
+	// statsButt.style('background-color', menuCol);
+	if(menu){
+		for (var i = menuButts.length -1; i >= 0; i--){
+			// mouthButt.style('background-color', mouthCol);
+			// meatButt.style('background-color', meatCol);
+			// skinButt.style('background-color', skinCol);
+			// handButt.style('background-color', handsCol);
+			menuButts[i].show();
+		}
+	}
+	if(mouthMenu){
+		console.log('show');
+		menuButt.show();
+		for (var i = mouthButts.length -1; i >= 0; i--){
+			// mouthButts[i].style('background-color', mouthCol);
+			mouthButts[i].show();
+		}
+	}
+	if(meatMenu){
+		menuButt.show();
+		for (var i = meatButts.length -1; i >= 0; i--){
+			// meatButts[i].style('background-color', meatCol);
+			meatButts[i].show();
+		}
+	}
+	if(skinMenu){
+		menuButt.show();
+		for (var i = skinButts.length -1; i >= 0; i--){
+			// skinButts[i].style('background-color', skinCol);
+			skinButts[i].show();
+		}
+	}
+	if(handMenu){
+		menuButt.show();
+		for (var i = handButts.length -1; i >= 0; i--){
+			// handButts[i].style('background-color', handsCol);
+			handButts[i].show();
+		}
+	}
+	if(stats){
+		menuButt.show();
+	}
 }
