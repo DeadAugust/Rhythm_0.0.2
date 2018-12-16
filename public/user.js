@@ -72,7 +72,9 @@ function setup(){
 	cookieButt.style('background-color', mouthCol);
 	cookieButt.parent('myCanvas');
 	cookieButt.mousePressed(function(){
-		socket.emit('buttPress', 'cookie');
+		if (event.type != 'touchstart'){
+			socket.emit('buttPress', 'cookie');
+		}
 	});
 	mouthButts.push(cookieButt);
 
@@ -80,7 +82,9 @@ function setup(){
 	waterButt = createButton('slurp some water');
 	waterButt.style('background-color', mouthCol);
 	waterButt.mousePressed(function(){
-		socket.emit('buttPress', 'water');
+		if (event.type != 'touchstart'){
+			socket.emit('buttPress', 'water');
+		}
 	});
 	mouthButts.push(waterButt);
 
@@ -88,7 +92,9 @@ function setup(){
 	lemonButt = createButton('suckle a lime');
 	lemonButt.style('background-color', mouthCol);
 	lemonButt.mousePressed(function(){
-		socket.emit('buttPress', 'lemon');
+		if (event.type != 'touchstart'){
+			socket.emit('buttPress', 'lemon');
+		}
 	});
 	mouthButts.push(lemonButt);
 
@@ -96,7 +102,9 @@ function setup(){
 	breathButt = createButton('find a deep breath');
 	breathButt.style('background-color', mouthCol);
 	breathButt.mousePressed(function(){
-		socket.emit('buttPress', 'breath');
+		if (event.type != 'touchstart'){
+			socket.emit('buttPress', 'breath');
+		}
 	});
 	mouthButts.push(breathButt);
 
@@ -104,7 +112,9 @@ function setup(){
 	jalapenoButt = createButton('pepper chomp');
 	jalapenoButt.style('background-color', mouthCol);
 	jalapenoButt.mousePressed(function(){
-		socket.emit('buttPress', 'jalapeno');
+		if (event.type != 'touchstart'){
+			socket.emit('buttPress', 'jalapeno');
+		}
 	});
 	mouthButts.push(jalapenoButt);
 
@@ -113,7 +123,9 @@ function setup(){
 	abButt = createButton('Ab Ripper X');
 	abButt.style('background-color', meatCol);
 	abButt.mousePressed(function(){
-		socket.emit('buttPress', 'ab');
+		if (event.type != 'touchstart'){
+			socket.emit('buttPress', 'ab');
+		}
 	});
 	meatButts.push(abButt);
 
@@ -121,14 +133,18 @@ function setup(){
 	handstandButt = createButton('invert body');
 	handstandButt.style('background-color', meatCol);
 	handstandButt.mousePressed(function(){
-		socket.emit('buttPress', 'handstand');
+		if (event.type != 'touchstart'){
+			socket.emit('buttPress', 'handstand');
+		}
 	});
 	meatButts.push(handstandButt);
 
 	pushupButt = createButton('push the earth away');
 	pushupButt.style('background-color', meatCol);
 	pushupButt.mousePressed(function(){
-		socket.emit('buttPress', 'pushup');
+		if (event.type != 'touchstart'){
+			socket.emit('buttPress', 'pushup');
+		}
 	});
 	meatButts.push(pushupButt);
 
@@ -136,7 +152,9 @@ function setup(){
 	squatButt = createButton('accrue thigh mass');
 	squatButt.style('background-color', meatCol);
 	squatButt.mousePressed(function(){
-		socket.emit('buttPress', 'squat');
+		if (event.type != 'touchstart'){
+			socket.emit('buttPress', 'squat');
+		}
 	});
 	meatButts.push(squatButt);
 
@@ -144,7 +162,9 @@ function setup(){
 	dabButt = createButton('#dab');
 	dabButt.style('background-color', meatCol);
 	dabButt.mousePressed(function(){
-		socket.emit('buttPress', 'dab');
+		if (event.type != 'touchstart'){
+			socket.emit('buttPress', 'dab');
+		}
 	});
 	meatButts.push(dabButt);
 
@@ -152,7 +172,9 @@ function setup(){
 	stretchButt = createButton('stretch, for your health');
 	stretchButt.style('background-color', meatCol);
 	stretchButt.mousePressed(function(){
-		socket.emit('buttPress', 'stretch');
+		if (event.type != 'touchstart'){
+			socket.emit('buttPress', 'stretch');
+		}
 	});
 	meatButts.push(stretchButt);
 
@@ -161,7 +183,9 @@ function setup(){
 	flogButt = createButton('no pain no salvation'); //too obtuse?
 	flogButt.style('background-color', skinCol);
 	flogButt.mousePressed(function(){
-		socket.emit('buttPress', 'flog');
+		if (event.type != 'touchstart'){
+			socket.emit('buttPress', 'flog');
+		}
 	});
 	skinButts.push(flogButt);
 
@@ -169,7 +193,9 @@ function setup(){
 	shockButt = createButton('Shock face');
 	shockButt.style('background-color', skinCol);
 	shockButt.mousePressed(function(){
-		socket.emit('buttPress', 'shock');
+		if (event.type != 'touchstart'){
+			socket.emit('buttPress', 'shock');
+		}
 	});
 	skinButts.push(shockButt);
 
@@ -177,7 +203,9 @@ function setup(){
 	slapButt = createButton('slap yourself');
 	slapButt.style('background-color', skinCol);
 	slapButt.mousePressed(function(){
-		socket.emit('buttPress', 'slap');
+		if (event.type != 'touchstart'){
+			socket.emit('buttPress', 'slap');
+		}
 	});
 	skinButts.push(slapButt);
 
@@ -187,7 +215,9 @@ function setup(){
 	paintButt = createButton('paint yourself');
 	paintButt.style('background-color', handsCol);
 	paintButt.mousePressed(function(){
-		socket.emit('buttPress', 'paint');
+		if (event.type != 'touchstart'){
+			socket.emit('buttPress', 'paint');
+		}
 	});
 	handButts.push(paintButt);
 
@@ -195,7 +225,9 @@ function setup(){
 	juggleButt = createButton('juggle dildos');
 	juggleButt.style('background-color', handsCol);
 	juggleButt.mousePressed(function(){
-		socket.emit('buttPress', 'juggle');
+		if (event.type != 'touchstart'){
+			socket.emit('buttPress', 'juggle');
+		}
 	});
 	handButts.push(juggleButt);
 
@@ -204,9 +236,11 @@ function setup(){
 	clothingoffButt = createButton('take OFF article of clothing');
 	clothingoffButt.style('background-color', handsCol);
 	clothingoffButt.mousePressed(function(){
-		if(clothesCount > 1){
-			// clothesCount--;
-			socket.emit('buttPress', 'clothes OFF');
+		if (event.type != 'touchstart'){
+			if(clothesCount > 1){
+				// clothesCount--;
+				socket.emit('buttPress', 'clothes OFF');
+			}
 		}
 	});
 	handButts.push(clothingoffButt);
@@ -215,9 +249,11 @@ function setup(){
 	clothingonButt = createButton('put ON article of clothing');
 	clothingonButt.style('background-color', handsCol);
 	clothingonButt.mousePressed(function(){
-		if(clothesCount < 14){
+		if (event.type != 'touchstart'){
+			if(clothesCount < 14){
 			// clothesCount++;
-			socket.emit('buttPress', 'clothes ON');
+				socket.emit('buttPress', 'clothes ON');
+			}
 		}
 	});
 	handButts.push(clothingonButt);
