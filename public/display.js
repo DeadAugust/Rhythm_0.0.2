@@ -74,7 +74,7 @@ function draw (){
     // timer
     background(0,150,50);
     clock = int(millis() / 1000);
-    clockMin = int(clock / 60) - (clockHour * 3600);
+    clockMin = int(clock / 60) - (clockHour * 60);
     clockSec = int(clock % 60);
     clockHour = int(clock / 3600);
     textSize(height/10);
