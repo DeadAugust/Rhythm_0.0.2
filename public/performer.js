@@ -1,7 +1,7 @@
 // var socket = io('/sharedScreen');
 var socket = io();
 
-// var queue = [];
+var queue = [];
 
 var nextCommand;
 var peebreak = false;
@@ -34,11 +34,11 @@ var meatCol, mouthCol, skinCol, handsCol, menuCol;
 // var now, next, next2, next3, next4, next5; //queue desplay
 
 function setup(){
-  noCanvas();
-  // createCanvas(windowWidth/2, 200);
-  // textAlign(CENTER);
-  // textSize(height/10);
-  // background(0,150,50);
+  // noCanvas();
+  createCanvas(windowWidth, windowHeight/3);
+  textAlign(CENTER);
+  textSize(height/10);
+  background(0,150,50);
   // startButton = createButton('start Game');
   // startButton.parent('myCanvas');
   // startButton.position(4* width/5, height/8);
@@ -310,6 +310,7 @@ function setup(){
   socket.on('heartbeat',
     function(data){
       clothesCount = data.clothesCount;
+      queue = data.queue;
     }
   );
 
@@ -329,15 +330,20 @@ function draw (){
     textSize(height/8);
     rectMode(CENTER);
     textAlign(CENTER);
-    fill(0,30,100);
-    rect(width/2, height/3, width/2, height/5);
+    rect(width/2, windowHeight/6, width, windowHeight/5);
     fill(0, 51, 183); //dark blue mork
+    textSize(windowHeight/10);
+    stroke(0);
+    strokeWeight(3);
+    fill(255);
+    var current = str(queue[0]);
+    text(current,width/2, windowHeight/5);
 
-    if(peebreak){
-      background(135);
-      textSize(72);
-      text('PEE BREAK', width/2, height/2);
-    }
+    // if(peebreak){
+    //   background(135);
+    //   textSize(72);
+    //   text('PEE BREAK', width/2, height/2);
+    // }
 
     showButts();
 
@@ -362,7 +368,10 @@ function draw (){
 //   console.log(test.findIndex(findBoy));
 // }
 function keyPressed() {
-  socket.emit('next');
+  if ((keyCode === 32) || (keyCode === ENTER)){
+    socket.emit('next');
+  }
+
 }
 // function masterButts(){
 //   for (var i = menuButts.length -1; i >= 0; i--){
