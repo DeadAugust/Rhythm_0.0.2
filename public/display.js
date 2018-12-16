@@ -107,11 +107,11 @@ function mousePressed(){
 }
 function queueBoxes(){
   //update text
-  for (var i = 0; i < 6; i++){
-    if(queue[i] == undefined){
-      queue[i] = 'needs input';
-    }
-  }
+  // for (var i = 0; i < 6; i++){
+  //   if(queue[i] == undefined){
+  //     queue[i] = 'needs input';
+  //   }
+  // }
   var now = str(queue[0]);
   var next = str(queue[1]);
   var next2 = str(queue[2]);
@@ -135,24 +135,55 @@ function queueBoxes(){
   //commands
   textSize(100);
   fill(255);
-  text(now,width/2,  9 * height/36);
+  if(queue[0] == undefined){
+    // console.log('this');
+    text('needs input', width/2,  9 * height/36);
+  }
+  else{
+    text(now, width/2,  9 * height/36);
+  }
   textSize(50);
   fill(200, 200);
-  text(next, width/2, 9* height/24);
+  if(queue[1] == undefined){
+    text('needs input', width/2, 9* height/24);
+  }
+  else{
+    text(next, width/2, 9* height/24);
+  }
   textSize(40);
   fill(150, 150);
-  text(next2, width/2, 10 * height/24);
+  if(queue[2] == undefined){
+    text('needs input', width/2, 10 * height/24);
+  }
+  else{
+    text(next2, width/2, 10 * height/24);
+  }
   textSize(30);
   fill(150, 100);
-  text(next3, width/2, 11 * height/24);
+  if(queue[3] == undefined){
+    text('needs input', width/2, 11 * height/24);
+  }
+  else{
+    text(next3, width/2, 11 * height/24);
+  }
   textSize(20);
   fill(50, 50);
-  text(next4, width/2, 12 * height/24);
+  if(queue[4] == undefined){
+    text('needs input', width/2, 12 * height/24);
+  }
+  else{
+    text(next4, width/2, 12 * height/24);
+  }
   textSize(10);
   fill(25, 25);
-  text(next5, width/2, 13 * height/24);
+  if(queue[5] == undefined){
+    text('needs input', width/2, 13 * height/24);
+  }
+  else{
+    text(next5, width/2, 13 * height/24);
+  }
   //queue total indicator
-  if(queue.length !== lastQueueLength){
+  if(queue.length > lastQueueLength){
     ding.play();
     fill(255,255,0);
     ellipse(1140, 1500, 200, 200);
