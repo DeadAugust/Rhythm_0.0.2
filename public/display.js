@@ -2,6 +2,7 @@
 var socket = io();
 
 var queue = [];
+var lastQueueLength = 0;
 var peebreak = false;
 
 //- - - - - - - timer
@@ -86,13 +87,6 @@ function draw (){
     }
     else text(clockHour + ":" + clockMin + ":" + clockSec, width/2, height/9);
 
-    // now.html(queue[0]);
-    // next.html(queue[1]);
-    // next2.html(queue[2]);
-    // next3.html(queue[3]);
-    // next4.html(queue[4]);
-    // next5.html(queue[5]);
-
     queueBoxes();
     if(peebreak){
       fill(200, 255, 0, 150);
@@ -103,7 +97,9 @@ function draw (){
     }
   }
 }
-
+function mousePressed(){
+  console.log(mouseX, mouseY);
+}
 function queueBoxes(){
   //update text
   for (var i = 0; i < 6; i++){
@@ -150,6 +146,25 @@ function queueBoxes(){
   textSize(10);
   fill(25, 25);
   text(next5, width/2, 13 * height/24);
+  //queue total indicator
+  if(queue.length !== lastQueueLength){
+    fill(255,255,0);
+    ellipse(1140, 1500, 200, 200);
+    lastQueueLength = queue.length;
+  }
+  else{
+    fill(0,100,170);
+    ellipse(1140, 1500, 200, 200);
+  }
+  textSize(width/15);
+  stroke(0);
+  strokeWeight(10);
+  fill(255);
+  text(queue.length, 1140, 1530);
+  noStroke();
+  textSize(width/25);
+  fill(0,50,150);
+  text('Total in Queue', 4 * width/5, 16 * height/24);
 
 
 
