@@ -188,6 +188,16 @@ function setup(){
   juggleButt.style('background-color', handsCol);
   juggleButt.mousePressed(function(){
     socket.emit('buttPress', 'juggle');
+    // juggleButt.remove();
+    // var me = juggleButt;
+    // function findBoy(element) {
+    //   return element == me;
+    // }
+    // console.log(handButts.findIndex(findBoy));
+    // // removeButts();
+    // handButts.splice(handButts.findIndex(findBoy), 1);
+    // // showButts();
+    // console.log(handButts);
   });
   handButts.push(juggleButt);
 
@@ -278,15 +288,17 @@ function setup(){
 
   menu = true;
 
-
+// - - - - - - persistent
   nextCommand = createButton('done, next command');
   nextCommand.mousePressed(function(){
     socket.emit('next');
   });
+
   peebreak = createButton('PEE BREAK');
   peebreak.mousePressed(function(){
     socket.emit('peebreak');
   });
+
   stopButt = createButton('Stop Active');
   stopButt.mousePressed(function(){
     stopPerformance = !stopPerformance;
@@ -340,10 +352,23 @@ function draw (){
     socket.emit('update', data);
 }
 
+// function mousePressed(){
+//   console.log(handButts);
+//   var me = 5;
+//   var test = [0, 3, 5, 8];
+//   function findBoy(element) {
+//     return element == me;
+// }
+//   console.log(test.findIndex(findBoy));
+// }
 function keyPressed() {
   socket.emit('next');
 }
-
+// function masterButts(){
+//   for (var i = menuButts.length -1; i >= 0; i--){
+//     menuButts[i].show();
+//   }
+// }
 function removeButts(){
 	if(menu){
 		for (var i = menuButts.length -1; i >= 0; i--){

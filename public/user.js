@@ -13,6 +13,11 @@ var meatButts = [];
 var skinButts = [];
 var handButts = [];
 var menuButts = [];
+var mouthButtsM = [];
+var meatButtsM =[];
+var skinButtsM = [];
+var handButtsM = [];
+var menuButtsM = [];
 var mouthButt, meatButt, skinButt, handButt, menuButt, statsButt;
 var mouthMenu, meatMenu, skinMenu, handMenu, menu;
 var abButt, footButt, handstandButt, pushupButt, squatButt, dabButt, stretchButt;
@@ -292,11 +297,11 @@ function setup(){
 	socket.on('heartbeat',
 		function(data){
       // peebreak = data.peebreak;
-			// menuButts = data.menuButts;
-			// mouthButts = data.mouthButts;
-			// meatButts = data.meatButts;
-			// skinButts = data.skinButts;
-			// handButts = data.handButts;
+			menuButtsM = data.menuButts;
+			mouthButtsM = data.mouthButts;
+			meatButtsM = data.meatButts;
+			skinButtsM = data.skinButts;
+			handButtsM = data.handButts;
 			// console.log('heartbeat');
 			clothesCount = data.clothesCount;
 			stopPerformance = data.stopPerformance;
