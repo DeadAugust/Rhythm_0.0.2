@@ -21,7 +21,9 @@ var flogButt, shockButt, slapButt;
 var paintButt, juggleButt, clothingoffButt, clothingonButt;
 var oneButt; //to rule them all
 var stopButt;
-var clothesCount = 7; //starting # of articles of clothing, to prevent nudity :(
+var stopPerformance;
+var oneStop = false;
+var clothesCount; //starting # of articles of clothing, to prevent nudity :(
 
 //category colors
 var meatCol, mouthCol, skinCol, handsCol, menuCol;
@@ -49,6 +51,7 @@ function setup(){
 	skinCol = color(77, 166, 255, 100); //blue
 	handsCol = color(255, 102, 204, 100); //pink
 	menuCol = color(100,100,155, 100); //
+	stopCol = color(255, 0, 0);
 
 	//starting menus
 	menu = true;
@@ -197,7 +200,7 @@ function setup(){
 	clothingoffButt.style('background-color', handsCol);
 	clothingoffButt.mousePressed(function(){
 		if(clothesCount > 1){
-			clothesCount--;
+			// clothesCount--;
 			socket.emit('buttPress', 'clothes OFF');
 		}
 	});
@@ -208,7 +211,7 @@ function setup(){
 	clothingonButt.style('background-color', handsCol);
 	clothingonButt.mousePressed(function(){
 		if(clothesCount < 14){
-			clothesCount++;
+			// clothesCount++;
 			socket.emit('buttPress', 'clothes ON');
 		}
 	});
@@ -275,13 +278,12 @@ function setup(){
 	});
 	menuButts.push(statsButt);
 
-	// menuButt = createButton('Menu');
-	// menuButt.style('background-color', menuCol);
-	// menuButt.mousePressed(function(){
-	// 	removeButts();
-	// 	menu = true;
-	// 	oneButt = false;
-	// });
+	stopButt = createButton('STOP PERFORMANCE');
+	stopButt.style('background-color', stopCol);
+	stopButt.mousePressed(function(){
+		oneStop = true;
+		socket.emit('stop request');
+	});
 
 	removeButts();
 
@@ -296,8 +298,15 @@ function setup(){
 			// skinButts = data.skinButts;
 			// handButts = data.handButts;
 			// console.log('heartbeat');
+			clothesCount = data.clothesCount;
+			stopPerformance = data.stopPerformance;
 		}
 	);
+
+	socket.on('drop',
+		function(data){
+
+		})
 }
 
 function draw() {
@@ -309,13 +318,20 @@ function draw() {
 		oneButt = true;
 	}
 
-	if(peebreak){
-		fill(135, 50);
-		rect(width/2, height/2, width/2, height/2);
-		textSize(72);
-		fill(0);
-		text('PEE BREAK', width/2, height/2);
+	if(stopPerformance && !oneStop){
+		stopButt.show();
 	}
+	else{
+		stopButt.hide();
+	}
+
+	// if(peebreak){
+	// 	fill(135, 50);
+	// 	rect(width/2, height/2, width/2, height/2);
+	// 	textSize(72);
+	// 	fill(0);
+	// 	text('PEE BREAK', width/2, height/2);
+	// }
 
 }
 

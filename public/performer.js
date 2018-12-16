@@ -19,7 +19,8 @@ var flogButt, shockButt, slapButt;
 var paintButt, juggleButt, clothingoffButt, clothingonButt;
 var oneButt; //to rule them all
 var stopButt;
-var clothesCount = 7; //starting # of articles of clothing, to prevent nudity :(
+var stopPerformance = false;
+var clothesCount; //starting # of articles of clothing, to prevent nudity :(
 
 //category colors
 var meatCol, mouthCol, skinCol, handsCol, menuCol;
@@ -196,7 +197,7 @@ function setup(){
   clothingoffButt.style('background-color', handsCol);
   clothingoffButt.mousePressed(function(){
     if(clothesCount > 1){
-      clothesCount--;
+      // clothesCount--;
       socket.emit('buttPress', 'clothes OFF');
     }
   });
@@ -207,7 +208,7 @@ function setup(){
   clothingonButt.style('background-color', handsCol);
   clothingonButt.mousePressed(function(){
     if(clothesCount < 14){
-      clothesCount++;
+      // clothesCount++;
       socket.emit('buttPress', 'clothes ON');
     }
   });
@@ -281,17 +282,22 @@ function setup(){
   nextCommand = createButton('done, next command');
   nextCommand.mousePressed(function(){
     socket.emit('next');
-  })
+  });
   peebreak = createButton('PEE BREAK');
   peebreak.mousePressed(function(){
     socket.emit('peebreak');
-  })
+  });
+  stopButt = createButton('Stop Active');
+  stopButt.mousePressed(function(){
+    stopPerformance = !stopPerformance;
+    socket.emit('stop active', stopPerformance);
+  });
 
 
 
   socket.on('heartbeat',
     function(data){
-      // atmans = data.atmans;
+      clothesCount = data.clothesCount;
     }
   );
 
@@ -378,47 +384,33 @@ function removeButts(){
 }
 
 function showButts(){
-	// menuButt.style('background-color', menuCol);
-	// mouthButt.style('background-color', mouthCol);
-	// meatButt.style('background-color', meatCol);
-	// skinButt.style('background-color', skinCol);
-	// handButt.style('background-color', handsCol);
-	// statsButt.style('background-color', menuCol);
 	if(menu){
 		for (var i = menuButts.length -1; i >= 0; i--){
-			// mouthButt.style('background-color', mouthCol);
-			// meatButt.style('background-color', meatCol);
-			// skinButt.style('background-color', skinCol);
-			// handButt.style('background-color', handsCol);
-			menuButts[i].show();
+		   menuButts[i].show();
 		}
 	}
 	if(mouthMenu){
 		console.log('show');
 		menuButt.show();
 		for (var i = mouthButts.length -1; i >= 0; i--){
-			// mouthButts[i].style('background-color', mouthCol);
 			mouthButts[i].show();
 		}
 	}
 	if(meatMenu){
 		menuButt.show();
 		for (var i = meatButts.length -1; i >= 0; i--){
-			// meatButts[i].style('background-color', meatCol);
 			meatButts[i].show();
 		}
 	}
 	if(skinMenu){
 		menuButt.show();
 		for (var i = skinButts.length -1; i >= 0; i--){
-			// skinButts[i].style('background-color', skinCol);
 			skinButts[i].show();
 		}
 	}
 	if(handMenu){
 		menuButt.show();
 		for (var i = handButts.length -1; i >= 0; i--){
-			// handButts[i].style('background-color', handsCol);
 			handButts[i].show();
 		}
 	}

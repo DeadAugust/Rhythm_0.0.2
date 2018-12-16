@@ -9,7 +9,11 @@ var skinButts = [];
 var handButts = [];
 var menuButts = [];
 
-
+var clothesCount = 7;
+var stopPerformance;
+var stopCount = 0;
+var stopLimit = 3;
+var end = false;
 
 /*
  // uncomment for heroku
@@ -68,7 +72,10 @@ function heartbeat(){ //so this is the only thing sent from server???
     mouthButts: mouthButts,
     meatButts: meatButts,
     skinButts: skinButts,
-    handButts: handButts
+    handButts: handButts,
+    clothesCount: clothesCount,
+    stopPerformance: stopPerformance,
+    end: end
   }
   io.sockets.emit('heartbeat', data);
   // console.log(data);
@@ -115,6 +122,12 @@ io.sockets.on('connection',
     socket.on('buttPress',
       function(data){
         command = data;
+        if(command == 'clothes OFF'){
+          clothesCount--;
+        }
+        if(command == 'clothes ON'){
+          clothesCount++;
+        }
         console.log(command);
         queue.push(command);
         // socket.broadcast.emit('newCommand', queue);
@@ -130,6 +143,24 @@ io.sockets.on('connection',
     socket.on('peebreak',
       function(){
         peebreak = !peebreak;
+      }
+    );
+
+    socket.on('stop active',
+      function(data){
+        stopPerformance = data;
+      }
+    );
+
+    socket.on('stop request',
+      function(){
+        console.log(stopCount);
+        stopCount++;
+        if(stopCount >= stopLimit){
+          end = true;
+          console.log('end');
+          // socket.emit('end');
+        }
       }
     );
 

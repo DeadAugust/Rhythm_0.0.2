@@ -15,6 +15,8 @@ var clockHour;
 
 // var started = false;
 var command = 'start';
+var end = false;
+var oneEnd = false;
 
 var now, next, next2, next3, next4, next5; //queue desplay
 
@@ -36,13 +38,33 @@ function setup(){ //1440, 2457, 1140, 2560)
     function(data){
       queue = data.queue;
       peebreak = data.peebreak;
+      end = data.end;
     }
   );
+
+  // socket.on('end',
+  //   function(){
+  //     console.log('end');
+  //     end = true;
+  //   }
+  // );
 
 }
 
 function draw (){
-
+  if(end){
+    if(!oneEnd){
+      fill(255, 0, 0, 180);
+      rect(width/2, height/2, width, height);
+      stroke(0);
+      strokeWeight(10);
+      textSize(150);
+      fill(255, 255, 255);
+      text('STOP', width/2, height/2);
+      oneEnd = true;
+    }
+  }
+  else{
     // timer
     background(0,150,50);
     clock = int(millis() / 1000);
@@ -79,6 +101,7 @@ function draw (){
       fill(100, 90, 255);
       text('PEE BREAK', width/2, height/2);
     }
+  }
 }
 
 function queueBoxes(){
