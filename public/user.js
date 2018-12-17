@@ -156,7 +156,7 @@ function setup(){
 	meatButts.push(pushupButt);
 
 
-	squatButt = createButton('accrue thigh mass');
+	squatButt = createButton('accrue ass mass');
 	squatButt.style('background-color', meatCol);
 	squatButt.mousePressed(function(){
 		if (event.type != 'touchstart'){
@@ -460,11 +460,14 @@ function removeButts(){
 			statPs[i].hide();
 		}
 		statsMenu = false;
+		menuButt.hide();
 	}
 	if(yesterdayMenu){
 		for(var i = yesterdayPs.length -1; i>= 0; i--){
 			yesterdayPs[i].hide();
 		}
+		yesterdayMenu = false;
+		menuButt.hide();
 	}
 }
 
