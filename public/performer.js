@@ -81,14 +81,14 @@ function setup(){
 	mouthButts.push(waterButt);
 
 
-	lemonButt = createButton('suckle a lime');
-	lemonButt.style('background-color', mouthCol);
-	lemonButt.mousePressed(function(){
-		if (event.type != 'touchstart'){
-			socket.emit('buttPress', 'lemon');
-		}
-	});
-	mouthButts.push(lemonButt);
+	// lemonButt = createButton('suckle a lime');
+	// lemonButt.style('background-color', mouthCol);
+	// lemonButt.mousePressed(function(){
+	// 	if (event.type != 'touchstart'){
+	// 		socket.emit('buttPress', 'lemon');
+	// 	}
+	// });
+	// mouthButts.push(lemonButt);
 
 
 	breathButt = createButton('find a deep breath');

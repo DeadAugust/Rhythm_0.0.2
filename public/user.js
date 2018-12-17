@@ -9,6 +9,7 @@ var peebreak = false;
 // var debounce = 800;
 var stats = [];
 var statPs = [];
+var yesterdayPs = [];
 var statsDiv;
 var mouthButts = [];
 var meatButts = [];
@@ -20,8 +21,8 @@ var meatButtsM =[];
 var skinButtsM = [];
 var handButtsM = [];
 var menuButtsM = [];
-var mouthButt, meatButt, skinButt, handButt, menuButt, statsButt;
-var mouthMenu, meatMenu, skinMenu, handMenu, menu;
+var mouthButt, meatButt, skinButt, handButt, menuButt, statsButt, yesterdayButt;
+var mouthMenu, meatMenu, skinMenu, handMenu, menu, statsMenu, yesterdayMenu;
 var abButt, footButt, handstandButt, pushupButt, squatButt, dabButt, stretchButt;
 var cookieButt, waterButt, lemonButt, breathButt, jalapenoButt;
 var flogButt, shockButt, slapButt;
@@ -70,6 +71,7 @@ function setup(){
 	skinMenu = true;
 	handMenu = true;
 	statsMenu = false;
+	yesterdayMenu = false; //why
 
 
 	//- - - - - - - mouth
@@ -94,14 +96,14 @@ function setup(){
 	mouthButts.push(waterButt);
 
 
-	lemonButt = createButton('suckle a lime');
-	lemonButt.style('background-color', mouthCol);
-	lemonButt.mousePressed(function(){
-		if (event.type != 'touchstart'){
-			socket.emit('buttPress', 'suck lime');
-		}
-	});
-	mouthButts.push(lemonButt);
+	// lemonButt = createButton('suckle a lime');
+	// lemonButt.style('background-color', mouthCol);
+	// lemonButt.mousePressed(function(){
+	// 	if (event.type != 'touchstart'){
+	// 		socket.emit('buttPress', 'suck lime');
+	// 	}
+	// });
+	// mouthButts.push(lemonButt);
 
 
 	breathButt = createButton('find a deep breath');
@@ -325,7 +327,7 @@ function setup(){
 	});
 	menuButts.push(handButt);
 
-	statsButt = createButton('Stats');
+	statsButt = createButton('Today\'s Stats');
 	statsButt.style('background-color', menuCol);
 	statsButt.mousePressed(function(){
 		if (event.type != 'touchstart'){
@@ -335,6 +337,17 @@ function setup(){
 		}
 	});
 	menuButts.push(statsButt);
+
+	yesterdayButt = createButton('Yesterday\'s Stats');
+	yesterdayButt.style('background-color', menuCol);
+	yesterdayButt.mousePressed(function(){
+		if (event.type != 'touchstart'){
+			removeButts();
+			yesterdayMenu = true;
+			oneButt = false;
+		}
+	});
+	menuButts.push(yesterdayButt);
 
 	stopButt = createButton('STOP PERFORMANCE');
 	stopButt.style('background-color', stopCol);
@@ -448,6 +461,11 @@ function removeButts(){
 		}
 		statsMenu = false;
 	}
+	if(yesterdayMenu){
+		for(var i = yesterdayPs.length -1; i>= 0; i--){
+			yesterdayPs[i].hide();
+		}
+	}
 }
 
 function showButts(){
@@ -499,6 +517,10 @@ function showButts(){
 		menuButt.show();
 		showStats();
 	}
+	if(yesterdayMenu){
+		menuButt.show();
+		yesterdayStats();
+	}
 }
 
 function showStats(){
@@ -507,4 +529,45 @@ function showStats(){
 		var stat = createP(stats[i].name + ': ' + stats[i].count);
 		statPs.push(stat);
 	}
+}
+
+function yesterdayStats(){
+	var timeY = createP('Yesterday\'s performance lasted: 3 hours, 1 minute, 41 seconds.');
+	yesterdayPs.push(timeY);
+	var cookieY = createP('cookies eaten: 28');
+	yesterdayPs.push(cookieY);
+	var waterY = createP('waters drank: 46');
+	yesterdayPs.push(waterY);
+	var limeY = createP('limes suckled: 108');
+	yesterdayPs.push(limeY);
+	var breathY = createP('breaths breathed: 203');statPs
+	yesterdayPs.push(breathY);
+	var pepperY = createP('peppers chomped: 43');
+	yesterdayPs.push(pepperY);
+	var abY = createP('abs cronched: 21');
+	yesterdayPs.push(abY);
+	var handY = createP('handstands stood: 27');
+	yesterdayPs.push(handY);
+	var pushY = createP('ups pushed: 28');
+	yesterdayPs.push(pushY);
+	var squatY = createP('squats squooted: 35');
+	yesterdayPs.push(squatY);
+	var dabY = createP('dabs dabbed: 197');
+	yesterdayPs.push(dabY);
+	var stretchY = createP('stretches stretchied: 56');
+	yesterdayPs.push(stretchY);
+	var flogY = createP('sins attoned for: 17');
+	yesterdayPs.push(flogY);
+	var shockY = createP('shock induced strokes: 12');
+	yesterdayPs.push(shockY);
+	var slapY = createP('faces slapped (all mine): 19');
+	yesterdayPs.push(slapY);
+	var paintY = createP('masterpieces painted: 28');
+	yesterdayPs.push(paintY);
+	var juggleY = createP('jildos duggled: 96 (so 32 times)');
+	yesterdayPs.push(juggleY);
+	var offY = createP('sexy stripteases: 73');
+	yesterdayPs.push(offY);
+	var onY = createP('clothes put back on shamefully: 73');
+	yesterdayPs.push(onY);
 }
