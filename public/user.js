@@ -1,3 +1,7 @@
+
+//PLEASE DON'T HACK THE BUTTONS FOR EVIL, I JUST LEARNED HOW TO DO THIS
+
+
 var socket = io();
 
 var peebreak = false;
