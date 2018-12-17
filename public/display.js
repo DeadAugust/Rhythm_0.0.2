@@ -208,10 +208,12 @@ function queueBoxes(){
   textSize(width/25);
   fill(0,50,150);
   text('Total in Queue', 4 * width/5, 16 * height/24);
-
+  push();
+  fill(0,80,180);
   textSize(width/12);
   text('To Interact,', width/2, 16 * height/20);
   text('Open This Page:', width/2, 17 * height/20);
+  pop();
   textSize(width/10);
   text('augustluhrs.art/play', width/2, 19* height/20);
 
